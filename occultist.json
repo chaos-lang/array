@@ -1,8 +1,8 @@
 {
-    "name": "template",
+    "name": "array",
     "version": "1.0.0",
-    "description": "Template for Chaos C extension developers.",
-    "tags": ["official", "template"],
+    "description": "Array library of the Chaos language.",
+    "tags": ["official", "array", "list"],
     "type": "extension",
     "license": "MIT",
     "authors": [
