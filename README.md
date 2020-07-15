@@ -22,3 +22,34 @@ kaos> list b = [4, 5, 6]
 kaos> array.merge(a, b)
 [1, 2, 3, 4, 5, 6]
 ```
+
+### num array.length(list l)
+
+Returns the length of list `l`.
+
+```chaos
+kaos> list a = [1, 2, 3]
+kaos> array.length(a)
+3
+```
+
+### list array.insert(list l, any x, num i)
+
+Inserts a new item `x` into list `l` before index `i`.
+
+```chaos
+kaos> list a = [1, 2, 3]
+kaos> array.reverse(a)
+[3, 2, 1]
+```
+
+### list array.reverse(list l)
+
+Reverse the order of items in the list `l`.
+
+```chaos
+kaos> import array
+kaos> list a = [1, 2, 3]
+kaos> array.reverse(a)
+[3, 2, 1]
+```
