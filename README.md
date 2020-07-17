@@ -53,3 +53,14 @@ kaos> list a = [1, 2, 3]
 kaos> array.reverse(a)
 [3, 2, 1]
 ```
+
+### list array.chunk(list l, num i)
+
+Chunk a list into `i` length sublists.
+
+```chaos
+kaos> import array
+kaos> list c = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+kaos> print array.chunk(c, 3)
+[['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h']]
+```

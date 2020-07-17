@@ -32,7 +32,7 @@ int KAOS_EXPORT Kaos_merge()
         kaos.copyListElement(merge_params_name[1], j);
     }
 
-    kaos.returnList(K_ANY);
+    kaos.returnList(list1_type);
     return 0;
 }
 
@@ -121,6 +121,42 @@ int KAOS_EXPORT Kaos_reverse()
     return 0;
 }
 
+// list array.chunk(list l, num x)
+
+char *chunk_params_name[] = {
+    "l",
+    "x"
+};
+unsigned chunk_params_type[] = {
+    K_LIST,
+    K_ANY
+};
+unsigned short chunk_params_length = (unsigned short) sizeof(chunk_params_type) / sizeof(unsigned);
+int KAOS_EXPORT Kaos_chunk()
+{
+    unsigned long list_length = kaos.getListLength(chunk_params_name[0]);
+    if (list_length == 0)
+        kaos.raiseError("Empty lists cannot be chunked");
+
+    enum Type list_type = kaos.getListType(chunk_params_name[0]);
+    unsigned long x = kaos.getVariableInt(chunk_params_name[1]);
+
+    kaos.startBuildingList();
+    kaos.startBuildingList();
+
+    for (unsigned long i = 0; i < list_length; i++) {
+        if (i != 0 && (i % x) == 0) {
+            kaos.finishList(list_type);
+            kaos.startBuildingList();
+        }
+        kaos.copyListElement(chunk_params_name[0], i);
+    }
+
+    kaos.finishList(list_type);
+    kaos.returnList(list_type);
+    return 0;
+}
+
 int KAOS_EXPORT KaosRegister(struct Kaos _kaos)
 {
     kaos = _kaos;
@@ -128,6 +164,7 @@ int KAOS_EXPORT KaosRegister(struct Kaos _kaos)
     kaos.defineFunction("length", K_NUMBER, length_params_name, length_params_type, length_params_length);
     kaos.defineFunction("insert", K_LIST, insert_params_name, insert_params_type, insert_params_length);
     kaos.defineFunction("reverse", K_LIST, reverse_params_name, reverse_params_type, reverse_params_length);
+    kaos.defineFunction("chunk", K_LIST, chunk_params_name, chunk_params_type, chunk_params_length);
 
     return 0;
 }

@@ -9,3 +9,6 @@ print array.insert(a, true, 1)
 print array.insert(a, 3.5, 1)
 print array.insert(a, 'hello', 1)
 print array.reverse(a)
+
+list c = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+print array.chunk(c, 3)
