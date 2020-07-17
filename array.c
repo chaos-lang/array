@@ -1,4 +1,5 @@
 #include "Chaos.h"
+#include <stdlib.h>
 
 
 // Array operations
@@ -16,6 +17,11 @@ unsigned merge_params_type[] = {
 unsigned short merge_params_length = (unsigned short) sizeof(merge_params_type) / sizeof(unsigned);
 int KAOS_EXPORT Kaos_merge()
 {
+    enum Type list1_type = kaos.getListType(merge_params_name[0]);
+    enum Type list2_type = kaos.getListType(merge_params_name[1]);
+    if (list1_type != K_ANY && list2_type != K_ANY && list1_type != list2_type)
+        kaos.raiseError("List types are incompatible for merging!");
+
     kaos.startBuildingList();
     unsigned long length_i = kaos.getListLength(merge_params_name[0]);
     for (unsigned long i = 0; i < length_i; i++) {
@@ -63,9 +69,29 @@ int KAOS_EXPORT Kaos_insert()
 {
     kaos.startBuildingList();
     unsigned long length_i = kaos.getListLength(insert_params_name[0]);
+    char *value = NULL;
     for (unsigned long i = 0; i < length_i; i++) {
         if (i == kaos.getVariableInt(insert_params_name[2])) {
-            kaos.createVariableInt(NULL, kaos.getVariableInt(insert_params_name[1]));
+            enum ValueType value_type = kaos.getValueType(insert_params_name[1]);
+            switch (value_type)
+            {
+                case V_BOOL:
+                    kaos.createVariableBool(NULL, kaos.getVariableBool(insert_params_name[1]));
+                    break;
+                case V_INT:
+                    kaos.createVariableInt(NULL, kaos.getVariableInt(insert_params_name[1]));
+                    break;
+                case V_FLOAT:
+                    kaos.createVariableFloat(NULL, kaos.getVariableFloat(insert_params_name[1]));
+                    break;
+                case V_STRING:
+                    value = kaos.getVariableString(insert_params_name[1]);
+                    kaos.createVariableString(NULL, value);
+                    free(value);
+                    break;
+                default:
+                    break;
+            }
         }
         kaos.copyListElement(insert_params_name[0], i);
     }
