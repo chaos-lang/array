@@ -37,22 +37,6 @@ int KAOS_EXPORT Kaos_merge()
     return 0;
 }
 
-// num array.length(list l)
-
-char *length_params_name[] = {
-    "l"
-};
-unsigned length_params_type[] = {
-    K_LIST
-};
-unsigned short length_params_length = (unsigned short) sizeof(length_params_type) / sizeof(unsigned);
-int KAOS_EXPORT Kaos_length()
-{
-    unsigned long list_length = kaos.getListLength(length_params_name[0]);
-    kaos.returnVariableInt((long long) list_length);
-    return 0;
-}
-
 // list array.insert(list l, any x, num i)
 
 char *insert_params_name[] = {
@@ -158,14 +142,36 @@ int KAOS_EXPORT Kaos_chunk()
     return 0;
 }
 
+// Information functions
+
+// num array.length(list l)
+
+char *length_params_name[] = {
+    "l"
+};
+unsigned length_params_type[] = {
+    K_LIST
+};
+unsigned short length_params_length = (unsigned short) sizeof(length_params_type) / sizeof(unsigned);
+int KAOS_EXPORT Kaos_length()
+{
+    unsigned long list_length = kaos.getListLength(length_params_name[0]);
+    kaos.returnVariableInt((long long) list_length);
+    return 0;
+}
+
 int KAOS_EXPORT KaosRegister(struct Kaos _kaos)
 {
     kaos = _kaos;
+
+    // Array operations
     kaos.defineFunction("merge", K_LIST, merge_params_name, merge_params_type, merge_params_length);
-    kaos.defineFunction("length", K_NUMBER, length_params_name, length_params_type, length_params_length);
     kaos.defineFunction("insert", K_LIST, insert_params_name, insert_params_type, insert_params_length);
     kaos.defineFunction("reverse", K_LIST, reverse_params_name, reverse_params_type, reverse_params_length);
     kaos.defineFunction("chunk", K_LIST, chunk_params_name, chunk_params_type, chunk_params_length);
+
+    // Information functions
+    kaos.defineFunction("length", K_NUMBER, length_params_name, length_params_type, length_params_length);
 
     return 0;
 }

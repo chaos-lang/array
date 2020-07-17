@@ -23,16 +23,6 @@ kaos> array.merge(a, b)
 [1, 2, 3, 4, 5, 6]
 ```
 
-### num array.length(list l)
-
-Returns the length of list `l`.
-
-```chaos
-kaos> list a = [1, 2, 3]
-kaos> array.length(a)
-3
-```
-
 ### list array.insert(list l, any x, num i)
 
 Inserts a new item `x` into list `l` before index `i`.
@@ -63,4 +53,16 @@ kaos> import array
 kaos> list c = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 kaos> print array.chunk(c, 3)
 [['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h']]
+```
+
+## Information functions
+
+### num array.length(list l)
+
+Returns the length of list `l`.
+
+```chaos
+kaos> list a = [1, 2, 3]
+kaos> array.length(a)
+3
 ```
