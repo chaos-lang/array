@@ -51,7 +51,7 @@ Chunk a list into `i` length sublists.
 ```chaos
 kaos> import array
 kaos> list c = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-kaos> print array.chunk(c, 3)
+kaos> array.chunk(c, 3)
 [['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h']]
 ```
 
