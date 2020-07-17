@@ -1,5 +1,6 @@
-#include "Chaos.h"
 #include <stdlib.h>
+
+#include "Chaos.h"
 
 
 // Array operations
