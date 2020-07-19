@@ -70,6 +70,19 @@ kaos> array.search(e, 'foo')
 [0, 2, 5]
 ```
 
+### list array.replace(list haystack, any needle, any replacement)
+
+Replaces all occurrences of the `needle` with the `replacement` in list `haystack`.
+
+```chaos
+kaos> list d = [1, 2, 3, 4, 5, 3, 6, 7, 3]
+kaos> list e = ['foo', 'bar', 'foo', 'baz', 'bar', 'foo']
+kaos> array.replace(d, 3, 17)
+[1, 2, 17, 4, 5, 17, 6, 7, 17]
+kaos> array.replace(e, 'foo', 'goo')
+['goo', 'bar', 'goo', 'baz', 'bar', 'goo']
+```
+
 ## Information Functions
 
 ### num array.length(list l)
