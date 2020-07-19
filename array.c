@@ -1,9 +1,10 @@
 #include <stdlib.h>
+#include <string.h>
 
 #include "Chaos.h"
 
 
-// Array operations
+// Array Operations
 
 // list array.merge(list l1, list l2)
 
@@ -114,7 +115,7 @@ char *chunk_params_name[] = {
 };
 unsigned chunk_params_type[] = {
     K_LIST,
-    K_ANY
+    K_NUMBER
 };
 unsigned short chunk_params_length = (unsigned short) sizeof(chunk_params_type) / sizeof(unsigned);
 int KAOS_EXPORT Kaos_chunk()
@@ -142,7 +143,77 @@ int KAOS_EXPORT Kaos_chunk()
     return 0;
 }
 
-// Information functions
+
+// Searching & Replacing
+
+// num list array.search(list haystack, any needle)
+
+char *search_params_name[] = {
+    "haystack",
+    "needle"
+};
+unsigned search_params_type[] = {
+    K_LIST,
+    K_ANY
+};
+unsigned short search_params_length = (unsigned short) sizeof(search_params_type) / sizeof(unsigned);
+int KAOS_EXPORT Kaos_search()
+{
+    unsigned long list_length = kaos.getListLength(search_params_name[0]);
+
+    kaos.startBuildingList();
+
+    for (unsigned long i = 0; i < list_length; i++) {
+        enum ValueType value_type = kaos.getListElementValueType(search_params_name[0], i);
+
+        bool x_b, y_b;
+        long long x_i, y_i;
+        long double x_f, y_f;
+        char *x_s, *y_s;
+
+        switch (value_type)
+        {
+            case V_BOOL:
+                x_b = kaos.getVariableBool(search_params_name[1]);
+                y_b = kaos.getListElementBool(search_params_name[0], i);
+                if (x_b == y_b) {
+                    kaos.createVariableInt(NULL, i);
+                }
+                break;
+            case V_INT:
+                x_i = kaos.getVariableInt(search_params_name[1]);
+                y_i = kaos.getListElementInt(search_params_name[0], i);
+                if (x_i == y_i) {
+                    kaos.createVariableInt(NULL, i);
+                }
+                break;
+            case V_FLOAT:
+                x_f = kaos.getVariableFloat(search_params_name[1]);
+                y_f = kaos.getListElementFloat(search_params_name[0], i);
+                if (x_f == y_f) {
+                    kaos.createVariableInt(NULL, i);
+                }
+                break;
+            case V_STRING:
+                x_s = kaos.getVariableString(search_params_name[1]);
+                y_s = kaos.getListElementString(search_params_name[0], i);
+                if (strcmp(x_s, y_s) == 0) {
+                    kaos.createVariableInt(NULL, i);
+                }
+                free(x_s);
+                free(y_s);
+                break;
+            default:
+                break;
+        }
+    }
+
+    kaos.returnList(K_NUMBER);
+    return 0;
+}
+
+
+// Information Functions
 
 // num array.length(list l)
 
@@ -164,13 +235,16 @@ int KAOS_EXPORT KaosRegister(struct Kaos _kaos)
 {
     kaos = _kaos;
 
-    // Array operations
+    // Array Operations
     kaos.defineFunction("merge", K_LIST, K_ANY, merge_params_name, merge_params_type, merge_params_length);
     kaos.defineFunction("insert", K_LIST, K_ANY, insert_params_name, insert_params_type, insert_params_length);
     kaos.defineFunction("reverse", K_LIST, K_ANY, reverse_params_name, reverse_params_type, reverse_params_length);
     kaos.defineFunction("chunk", K_LIST, K_ANY, chunk_params_name, chunk_params_type, chunk_params_length);
 
-    // Information functions
+    // Searching & Replacing
+    kaos.defineFunction("search", K_LIST, K_NUMBER, search_params_name, search_params_type, search_params_length);
+
+    // Information Functions
     kaos.defineFunction("length", K_NUMBER, K_ANY, length_params_name, length_params_type, length_params_length);
 
     return 0;

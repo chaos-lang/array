@@ -10,7 +10,7 @@ and import it with:
 import array
 ```
 
-## Array operations
+## Array Operations
 
 ### list array.merge(list l1, list l2)
 
@@ -44,9 +44,9 @@ kaos> array.reverse(a)
 [3, 2, 1]
 ```
 
-### list array.chunk(list l, num i)
+### list array.chunk(list l, num x)
 
-Chunk a list into `i` length sublists.
+Chunk a list into `x` length sublists.
 
 ```chaos
 kaos> import array
@@ -55,7 +55,22 @@ kaos> array.chunk(c, 3)
 [['a', 'b', 'c'], ['d', 'e', 'f'], ['g', 'h']]
 ```
 
-## Information functions
+## Searching & Replacing
+
+### num list array.search(list haystack, any needle)
+
+Searches the list `haystack` for a given value `needle` and returns the corresponding indexes if successful. Returns an empty list `[]` if unsuccessful.
+
+```chaos
+kaos> list d = [1, 2, 3, 4, 5, 3, 6, 7, 3]
+kaos> array.search(d, 3)
+[2, 5, 8]
+kaos> list e = ['foo', 'bar', 'foo', 'baz', 'bar', 'foo']
+kaos> array.search(e, 'foo')
+[0, 2, 5]
+```
+
+## Information Functions
 
 ### num array.length(list l)
 
