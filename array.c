@@ -165,13 +165,13 @@ int KAOS_EXPORT KaosRegister(struct Kaos _kaos)
     kaos = _kaos;
 
     // Array operations
-    kaos.defineFunction("merge", K_LIST, merge_params_name, merge_params_type, merge_params_length);
-    kaos.defineFunction("insert", K_LIST, insert_params_name, insert_params_type, insert_params_length);
-    kaos.defineFunction("reverse", K_LIST, reverse_params_name, reverse_params_type, reverse_params_length);
-    kaos.defineFunction("chunk", K_LIST, chunk_params_name, chunk_params_type, chunk_params_length);
+    kaos.defineFunction("merge", K_LIST, K_ANY, merge_params_name, merge_params_type, merge_params_length);
+    kaos.defineFunction("insert", K_LIST, K_ANY, insert_params_name, insert_params_type, insert_params_length);
+    kaos.defineFunction("reverse", K_LIST, K_ANY, reverse_params_name, reverse_params_type, reverse_params_length);
+    kaos.defineFunction("chunk", K_LIST, K_ANY, chunk_params_name, chunk_params_type, chunk_params_length);
 
     // Information functions
-    kaos.defineFunction("length", K_NUMBER, length_params_name, length_params_type, length_params_length);
+    kaos.defineFunction("length", K_NUMBER, K_ANY, length_params_name, length_params_type, length_params_length);
 
     return 0;
 }
