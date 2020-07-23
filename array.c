@@ -38,7 +38,7 @@ int KAOS_EXPORT Kaos_merge()
     return 0;
 }
 
-// list array.insert(list l, any x, num i)
+// list array.insert(list l, any x, num i = -1)
 
 char *insert_params_name[] = {
     "l",
