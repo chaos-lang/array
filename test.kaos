@@ -9,6 +9,7 @@ print array.insert(a, 5, 1)
 print array.insert(a, true, 1)
 print array.insert(a, 3.5, 1)
 print array.insert(a, 'hello', 1)
+print array.insert(a, 4)
 print array.reverse(a)
 print array.chunk(c, 3)
 
