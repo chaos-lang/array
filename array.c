@@ -16,6 +16,10 @@ unsigned merge_params_type[] = {
     K_LIST,
     K_LIST
 };
+unsigned merge_params_secondary_type[] = {
+    K_ANY,
+    K_ANY
+};
 unsigned short merge_params_length = (unsigned short) sizeof(merge_params_type) / sizeof(unsigned);
 int KAOS_EXPORT Kaos_merge()
 {
@@ -49,6 +53,11 @@ unsigned insert_params_type[] = {
     K_LIST,
     K_ANY,
     K_NUMBER
+};
+unsigned insert_params_secondary_type[] = {
+    K_ANY,
+    K_ANY,
+    K_ANY
 };
 unsigned short insert_params_length = (unsigned short) sizeof(insert_params_type) / sizeof(unsigned);
 int KAOS_EXPORT Kaos_insert()
@@ -98,6 +107,9 @@ char *reverse_params_name[] = {
 unsigned reverse_params_type[] = {
     K_LIST
 };
+unsigned reverse_params_secondary_type[] = {
+    K_ANY
+};
 unsigned short reverse_params_length = (unsigned short) sizeof(reverse_params_type) / sizeof(unsigned);
 int KAOS_EXPORT Kaos_reverse()
 {
@@ -120,6 +132,10 @@ char *chunk_params_name[] = {
 unsigned chunk_params_type[] = {
     K_LIST,
     K_NUMBER
+};
+unsigned chunk_params_secondary_type[] = {
+    K_ANY,
+    K_ANY
 };
 unsigned short chunk_params_length = (unsigned short) sizeof(chunk_params_type) / sizeof(unsigned);
 int KAOS_EXPORT Kaos_chunk()
@@ -158,6 +174,10 @@ char *search_params_name[] = {
 };
 unsigned search_params_type[] = {
     K_LIST,
+    K_ANY
+};
+unsigned search_params_secondary_type[] = {
+    K_ANY,
     K_ANY
 };
 unsigned short search_params_length = (unsigned short) sizeof(search_params_type) / sizeof(unsigned);
@@ -225,6 +245,11 @@ char *replace_params_name[] = {
 };
 unsigned replace_params_type[] = {
     K_LIST,
+    K_ANY,
+    K_ANY
+};
+unsigned replace_params_secondary_type[] = {
+    K_ANY,
     K_ANY,
     K_ANY
 };
@@ -307,6 +332,9 @@ char *length_params_name[] = {
 unsigned length_params_type[] = {
     K_LIST
 };
+unsigned length_params_secondary_type[] = {
+    K_ANY
+};
 unsigned short length_params_length = (unsigned short) sizeof(length_params_type) / sizeof(unsigned);
 int KAOS_EXPORT Kaos_length()
 {
@@ -326,17 +354,17 @@ int KAOS_EXPORT KaosRegister(struct Kaos _kaos)
     };
 
     // Array Operations
-    kaos.defineFunction("merge", K_LIST, K_ANY, merge_params_name, merge_params_type, merge_params_length, NULL, 0);
-    kaos.defineFunction("insert", K_LIST, K_ANY, insert_params_name, insert_params_type, insert_params_length, insert_optional_params, 1);
-    kaos.defineFunction("reverse", K_LIST, K_ANY, reverse_params_name, reverse_params_type, reverse_params_length, NULL, 0);
-    kaos.defineFunction("chunk", K_LIST, K_ANY, chunk_params_name, chunk_params_type, chunk_params_length, NULL, 0);
+    kaos.defineFunction("merge", K_LIST, K_ANY, merge_params_name, merge_params_type, merge_params_secondary_type, merge_params_length, NULL, 0);
+    kaos.defineFunction("insert", K_LIST, K_ANY, insert_params_name, insert_params_type, insert_params_secondary_type, insert_params_length, insert_optional_params, 1);
+    kaos.defineFunction("reverse", K_LIST, K_ANY, reverse_params_name, reverse_params_type, reverse_params_secondary_type, reverse_params_length, NULL, 0);
+    kaos.defineFunction("chunk", K_LIST, K_ANY, chunk_params_name, chunk_params_type, chunk_params_secondary_type, chunk_params_length, NULL, 0);
 
     // Searching & Replacing
-    kaos.defineFunction("search", K_LIST, K_NUMBER, search_params_name, search_params_type, search_params_length, NULL, 0);
-    kaos.defineFunction("replace", K_LIST, K_ANY, replace_params_name, replace_params_type, replace_params_length, NULL, 0);
+    kaos.defineFunction("search", K_LIST, K_NUMBER, search_params_name, search_params_type, search_params_secondary_type, search_params_length, NULL, 0);
+    kaos.defineFunction("replace", K_LIST, K_ANY, replace_params_name, replace_params_type, replace_params_secondary_type, replace_params_length, NULL, 0);
 
     // Information Functions
-    kaos.defineFunction("length", K_NUMBER, K_ANY, length_params_name, length_params_type, length_params_length, NULL, 0);
+    kaos.defineFunction("length", K_NUMBER, K_ANY, length_params_name, length_params_type, length_params_secondary_type, length_params_length, NULL, 0);
 
     return 0;
 }
